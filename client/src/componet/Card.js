@@ -1,14 +1,14 @@
 import React from 'react'
 
-export default function Card() {
+export default function Card({data}) {
     return (
         <div>
             <div>
-                <div class="card mt-3" style={{ "width": "18rem", "maxHeight": "360px" }}>
-                    <img src="..." class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">this is some important text.</p>
+                <div className="card mt-3" style={{ "width": "18rem", "maxHeight": "360px" }}>
+                    <img src={data.img} className="card-img-top" style={{"height":"10rem", "objectFit":"contain !important"}} alt="..." />
+                    <div className="card-body">
+                        <h5 className="card-title">{data.name}</h5>
+                        <p className="card-text">{data.description}.</p>
                         <div className='container w-100'>
                             <select className='bg-success m-2 h-100 rounded'>
                                 {
@@ -20,8 +20,8 @@ export default function Card() {
                                 }
                             </select>
                             <select className='bg-success m-2 h-100 rounded'>
-                                <option value="half">Half</option>
-                                <option value="full">Full</option>
+                                <option value="half">{data.options.half}</option>
+                                <option value="full">{data.options.full}</option>
                             </select>
 
                             <div className='d-inline h-100 fs-5'>Total Price</div>

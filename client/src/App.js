@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Login from './screens/Login';
 import Signup from './screens/Signup.js';
+// import { useEffect } from 'react';
 
 // below lines we are import b'coz our colouser images are not changes when click on button.
 import "../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css";
@@ -15,6 +16,9 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
 
 function App() {
+
+ 
+
   return (
     <Router>
       <div >

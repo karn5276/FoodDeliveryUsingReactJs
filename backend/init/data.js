@@ -126,12 +126,13 @@ const sample=[
         },
         description:"made using india masala and basamti rice"
     },
+    
 ];
 
 
 const categorySample=[
     {
-        categoryName:"pizza"
+        categoryName:"Pizza"
     },
     {
         categoryName:"starter"
@@ -139,11 +140,12 @@ const categorySample=[
     {
         categoryName:"Biryani/rice"
     },
-    {
-        categoryName:"burger"
-    },
+    
     {
         categoryName:"roti"
+    },
+    {
+        categoryName:"paneer"
     },
 
 ]
