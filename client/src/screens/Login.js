@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link , Navigate, useNavigate} from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 
 
 export default function Login() {
@@ -33,6 +33,8 @@ export default function Login() {
     }
     if (json.success) {
       alert("login Successfully");
+      localStorage.setItem("authToken",json.authtoken);
+      console.log(localStorage.getItem("authToken"));
       navigate("/")
     }
 

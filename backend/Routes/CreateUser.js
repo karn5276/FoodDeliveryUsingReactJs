@@ -3,14 +3,22 @@ const router=express.Router();
 const User=require("../models/user");
 const { validateUser,validateUserLogin }=require("../middleware");
 
+const bcrypt=require("bcryptjs");
+const jwt=require("jsonwebtoken");
+const jwtsecret = "aferohugeger4934734fgjkfgoafghgff";
+
 
 router.post("/createuser",validateUser,async(req,res)=>{
     console.log(req.body);
+
+    var salt = bcrypt.genSaltSync(10);
+    var secpassword = bcrypt.hashSync(req.body.password, salt);
+
     try{
         await User.create({
             name:  req.body.name || "sham" ,
             email: req.body.email || "sham123@gmail.com",
-            password:  req.body.password || "sham123",
+            password:  secpassword || "sham123",
             location:req.body.location || "pune maharastra"  
         });
         res.json({success:true});
@@ -30,12 +38,20 @@ router.post("/login",validateUserLogin,async(req,res)=>{
         if(!userData){
             return res.status(400).json({error:"enter valid credentials"});
         }
-
-        if(req.body.password!==userData.password){
+        const pwdcompare=await bcrypt.compare(req.body.password,userData.password);
+        if(!pwdcompare){
             return res.status(400).json({error:"enter valid credentials"});
         }
 
-        res.json({success:true})
+        const data = {
+            user:{
+                id:userData.id
+            }
+        }
+
+        const authtoken = jwt.sign(data,jwtsecret);
+        return res.json({success:true,authtoken:authtoken});
+
 
     }
     catch(err){
