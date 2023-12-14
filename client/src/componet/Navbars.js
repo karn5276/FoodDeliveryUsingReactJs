@@ -1,7 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Navbars() {
+    const navigate=useNavigate();
+    const handleLogout=()=>{
+        localStorage.removeItem("authToken");
+        navigate("/login");
+    }
     return (
         <div>
 
@@ -12,19 +17,34 @@ export default function Navbars() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/">Home</Link>
+                        <ul className="navbar-nav me-auto">
+                            <li className="nav-item active">
+                                <Link className="nav-link fs-4 m-2 active fw-bold" aria-current="page" to="/">Home</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/login">Login</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/signup">SignUp</Link>
-                            </li>
-                            
-                            
+                            {
+                                localStorage.getItem("authToken") ? <li className="nav-item active">
+                                    <Link className="nav-link fs-4 m-2 active fw-bold" aria-current="page" to="/">Orders</Link>
+                                </li>
+                                    : ""
+                            }
                         </ul>
+
+
+                        <div>
+                        {
+                                localStorage.getItem("authToken")?
+                                <div>
+                                    <button className="btn bg-white rouded m-2 text-success" >myCart</button>
+                                    <button className="btn bg-white rouded m-2 text-danger" onClick={handleLogout}>LogOut</button>
+                                </div>
+                                :
+                                <div>
+                                    <Link className="btn bg-white rouded m-2 text-success" to="/login">Login</Link>
+                                    <Link className="btn bg-white rouded m-2 text-success" to="/signup">SignUp</Link>
+                                </div>
+                            }
+                            </div>
+
                     </div>
                 </div>
             </nav>

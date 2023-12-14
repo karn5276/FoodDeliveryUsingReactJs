@@ -11,6 +11,7 @@ export default function Home() {
 
     const [alldata, setalldata] = useState([]);
     const [alldataCat, setalldataCat] = useState([]);
+    const [search,setsearch]=useState("");
 
 
     async function dataHandler() {
@@ -32,7 +33,35 @@ export default function Home() {
     return (
         <>
             <div><Navbar></Navbar></div>
-            <div><Carousal></Carousal></div>
+            <div>
+            <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel" style={{"objectFit":"contain !important"}}>
+                <div className="carousel-inner" id='carousel'>
+                    <div className="carousel-caption d-none d-md-block" style={{"zIndex":"10"}}>
+                        <form className="d-flex " >
+                            <input className="form-control me-2" type="search" placeholder="Search" value={search} onChange={(e)=>setsearch(e.target.value)} aria-label="Search"/>
+                                
+                        </form>
+                    </div>
+                    <div className="carousel-item active">
+                        <img src="https://source.unsplash.com/random/900×700/?burger" className="d-block w-100" alt="..." />
+                    </div>
+                    <div className="carousel-item">
+                        <img src="https://source.unsplash.com/random/900×700/?momos" className="d-block w-100" alt="..." />
+                    </div>
+                    <div className="carousel-item">
+                        <img src="https://source.unsplash.com/random/900×700/?sea" className="d-block w-100" alt="..." />
+                    </div>
+                </div>
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
             <div className='m-3' >
                 {
                     alldataCat != [] ? alldataCat.map((data) => {
@@ -43,7 +72,7 @@ export default function Home() {
                                 <hr></hr>
                                 <div id="foodData">
                                 {
-                                    alldata != [] ?alldata.filter((item)=>item.categoryName==data.categoryName).map((data2) => {
+                                    alldata != [] ?alldata.filter((item)=>item.categoryName==data.categoryName && (item.name.toLowerCase().includes(search.toLowerCase()))).map((data2) => {
                                         return(
                                              <div key={data2._id}>
 
