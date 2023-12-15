@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Footer from '../componet/Footer';
 import Navbar from '../componet/Navbars.js';
 import Card from '../componet/Card.js';
-import Carousal from '../componet/Carousal.js';
 import axios from "axios";
-
 
 
 export default function Home() {

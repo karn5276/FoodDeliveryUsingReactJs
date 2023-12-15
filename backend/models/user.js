@@ -21,7 +21,19 @@ const userSchema = new mongoose.Schema({
     date:{
         type:Date,
         default:Date.now
-    }
+    },
+    cart:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Cart"
+        }
+    ],
+    order:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Order"
+        }
+    ]
 });
 
 const User=mongoose.model("User",userSchema);
