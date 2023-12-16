@@ -5,8 +5,10 @@ import { useDispatchCart,useCart } from '../componet/ContextReducer.js';
 export default function Card({ data }) {
     const [qty,setqty] = useState(1);
     const [size,setsize] = useState("");
+
     let dispatch=useDispatchCart();
     let data2=useCart();
+    
     let options=data.options;
     let priceOption=Object.keys(options);
 
