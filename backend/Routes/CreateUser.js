@@ -5,6 +5,7 @@ const { validateUser,validateUserLogin }=require("../middleware");
 
 const bcrypt=require("bcryptjs");
 const jwt=require("jsonwebtoken");
+const { userSchema } = require("../schema");
 const jwtsecret = "aferohugeger4934734fgjkfgoafghgff";
 
 
@@ -50,7 +51,7 @@ router.post("/login",validateUserLogin,async(req,res)=>{
         }
 
         const authtoken = jwt.sign(data,jwtsecret);
-        return res.json({success:true,authtoken:authtoken});
+        return res.json({success:true,authtoken:authtoken,id:userData._id});
 
 
     }
@@ -60,6 +61,11 @@ router.post("/login",validateUserLogin,async(req,res)=>{
 
     }
 })
+
+
+
+
+
 
 
 module.exports=router;

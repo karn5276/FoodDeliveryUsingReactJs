@@ -7,7 +7,7 @@ export default function Card({ data }) {
     const [size,setsize] = useState("");
 
     let dispatch=useDispatchCart();
-    let data2=useCart();
+    // let data2=useCart();
     
     let options=data.options;
     let priceOption=Object.keys(options);
@@ -17,27 +17,27 @@ export default function Card({ data }) {
     const handleAddtoCart=async(e)=>{
         e.preventDefault();
         // below concept is work as if similar id product is comming then that will be add in food array. if there is 3 similar product come in cart then that product is stored in food array.
-        let food=[];
-        for(const item of data2){
-            if(item.id===data._id){
-                food=item;
-                break;
-            }
-        }
+        // let food=[];
+        // for(const item of data2){
+        //     if(item.id===data._id){
+        //         food=item;
+        //         break;
+        //     }
+        // }
 
-        if(food != []){
-            if(food.size===size){
-                await dispatch({type:"UPDATE",id:data._id,price:finalPrice,qty:qty})
-                return
-            }
-            else if(food.size!=size){
-                await dispatch({type:"ADD",id:data._id,name:data.name,price:finalPrice,qty:qty,size:size});
-                return
-            }
-            return
-        }
+        // if(food != []){
+        //     if(food.size===size){
+        //         await dispatch({type:"UPDATE",id:data._id,price:finalPrice,qty:qty})
+        //         return;
+        //     }
+        //     else if(food.size!==size){
+        //         await dispatch({type:"ADD",id:data._id,name:data.name,price:finalPrice,qty:qty,size:size});
+        //         return;
+        //     }
+        //     return;
+        // }
 
-        await dispatch({type:"ADD",id:data._id,name:data.name,price:finalPrice,qty:qty,size:size});
+        await dispatch({type:"ADD",id:data._id,name:data.name,price:finalPrice,qty:qty,size:size,img:data.img,date:new Date()});
         
     }
 

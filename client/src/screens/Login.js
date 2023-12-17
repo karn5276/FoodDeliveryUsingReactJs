@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import { Link , useNavigate} from 'react-router-dom';
 
 
 export default function Login() {
+  
   const [credentials, setCredentials] = useState({ password: "", email: ""});
   const navigate=useNavigate();
+
 
 
   const changeHandler = (event) => {
@@ -26,6 +28,8 @@ export default function Login() {
       body: JSON.stringify({ email: credentials.email, password: credentials.password}),
     });
     const json = await data.json();
+    localStorage.setItem("email",credentials.email);
+
 
     if (!json.success) {
       alert("enter valid credentials");
@@ -34,7 +38,7 @@ export default function Login() {
     if (json.success) {
       alert("login Successfully");
       localStorage.setItem("authToken",json.authtoken);
-      console.log(localStorage.getItem("authToken"));
+      // console.log(localStorage.getItem("authToken"));
       navigate("/")
     }
 

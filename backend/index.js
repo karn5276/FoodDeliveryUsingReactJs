@@ -4,7 +4,11 @@ const dbmain=require("./db");
 const cors=require("cors");
 const food=require("./models/food");
 const foodCat=require('./models/category');
-port=2000;
+const port=2000;
+const bodyParser=require("body-parser");
+
+app.use(bodyParser.json());
+
 
 
 
@@ -20,7 +24,9 @@ app.use((req,res,next)=>{
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use("/api",require("./Routes/CreateUser"));
+app.use("/",require("./Routes/Order"));
 dbmain();
 
 app.get("/",async(req,res)=>{

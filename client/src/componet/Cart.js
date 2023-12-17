@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useCart, useDispatchCart } from './ContextReducer'
 
 export default function Cart() {
@@ -14,6 +14,26 @@ export default function Cart() {
     }
 
     let totalPrice = data.reduce((total, food) => total + food.price, 0);
+
+    
+    const Checkouthandler = async (e) => {
+        e.preventDefault();
+        dispatch({ type: "DELETE" });
+        let email=localStorage.getItem("email")
+
+        const response = await fetch(`http://localhost:2000/orders`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: data, email:email  }),
+        });
+        await response.json();
+     
+
+
+
+    }
 
     return (
         <div>
@@ -50,7 +70,7 @@ export default function Cart() {
                     </tbody>
                 </table>
                 <div><h1>Total Price: {totalPrice}</h1></div>
-                <div><button className='btn btn-success mt-5' onClick={() => { dispatch({ type: "DELETE" }) }}>Check Out</button></div>
+                <div><button className='btn btn-success mt-5' onClick={Checkouthandler}>Check Out</button></div>
 
             </div>
         </div>

@@ -1,4 +1,5 @@
 const mongoose=require("mongoose");
+const Order=require("./Order");
 
 
 const userSchema = new mongoose.Schema({
@@ -22,18 +23,7 @@ const userSchema = new mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    cart:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Cart"
-        }
-    ],
-    order:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Order"
-        }
-    ]
+    
 });
 
 const User=mongoose.model("User",userSchema);
