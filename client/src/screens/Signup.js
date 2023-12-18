@@ -29,12 +29,12 @@ export default function Signup() {
     const json = await data.json();
 
     if (!json.success) {
-      alert("enter valid credentials");
+      alert(json.errors);
 
     }
     if (json.success) {
       alert("Sign Up Successfully");
-      navigate("/")
+      navigate("/login")
     }
 
   }
@@ -62,7 +62,7 @@ export default function Signup() {
             <input type="text" className="form-control" name="location" value={credentials.location} onChange={changeHandler} placeholder="Address" />
           </div>
 
-          <button type="submit" className="btn btn-success m-3">Submit</button>
+          <button type="submit" className="btn btn-success m-3">Sign Up</button>
           <Link to="/login" className='btn btn-danger m-3'>Login</Link>
         </form >
       </div>

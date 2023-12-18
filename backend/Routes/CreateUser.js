@@ -5,14 +5,13 @@ const { validateUser,validateUserLogin }=require("../middleware");
 
 const bcrypt=require("bcryptjs");
 const jwt=require("jsonwebtoken");
-const { userSchema } = require("../schema");
 const jwtsecret = "aferohugeger4934734fgjkfgoafghgff";
 
 
 router.post("/createuser",validateUser,async(req,res)=>{
-    console.log(req.body);
 
-    var salt = bcrypt.genSaltSync(10);
+
+    var salt = bcrypt.genSaltSync(10); // this is length of salt which we want to insert in the password.
     var secpassword = bcrypt.hashSync(req.body.password, salt);
 
     try{
@@ -39,7 +38,9 @@ router.post("/login",validateUserLogin,async(req,res)=>{
         if(!userData){
             return res.status(400).json({error:"enter valid credentials"});
         }
+
         const pwdcompare=await bcrypt.compare(req.body.password,userData.password);
+
         if(!pwdcompare){
             return res.status(400).json({error:"enter valid credentials"});
         }
@@ -49,8 +50,8 @@ router.post("/login",validateUserLogin,async(req,res)=>{
                 id:userData.id
             }
         }
-
-        const authtoken = jwt.sign(data,jwtsecret);
+        // const expiresIn='30';
+        const authtoken = jwt.sign(data,jwtsecret, { expiresIn: 30 });
         return res.json({success:true,authtoken:authtoken,id:userData._id});
 
 

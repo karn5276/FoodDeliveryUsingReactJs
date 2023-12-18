@@ -85,9 +85,6 @@ export default function Home() {
                     })
                         : ""
                 }
-                {/* <Card data={alldata[1]}></Card>
-                <Card data={alldata[2]}></Card>
-                <Card data={alldata[3]}></Card> */}
 
             </div>
             <div><Footer></Footer></div>

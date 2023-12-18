@@ -60,7 +60,7 @@ export default function Login() {
             <input type="password" className="form-control" name="password" value={credentials.password} onChange={changeHandler} placeholder="Password" />
           </div>
           
-          <button type="submit" className="btn btn-success m-3">Submit</button>
+          <button type="submit" className="btn btn-success m-3">Login</button>
           <Link to="/signup" className='btn btn-danger m-3'>Sign Up</Link>
         </form >
       </div>
