@@ -1,7 +1,8 @@
 const mongoose=require("mongoose");
+require('dotenv').config();
 
 async function main(){
-    await mongoose.connect('mongodb://127.0.0.1:27017/GoFood')
+    await mongoose.connect(process.env.ATLASDB_URL) 
     .then(()=>console.log("db connected"))
     .catch(()=>console.log("db not connected"));
 }
