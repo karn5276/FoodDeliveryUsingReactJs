@@ -5,7 +5,7 @@ const dbmain=require("./db");
 const cors=require("cors");
 const food=require("./models/food");
 const foodCat=require('./models/category');
-const port=process.end.PORT || 2000;
+const port=process.env.PORT || 2000;
 const bodyParser=require("body-parser");
 
 app.use(bodyParser.json());
