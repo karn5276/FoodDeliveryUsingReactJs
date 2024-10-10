@@ -1,12 +1,12 @@
 const mongoose =require("mongoose");
-const dbmain=require("../db");
+const database=require("../db");
 const foodSchema=require("../models/food");
 const categorySchema=require("../models/category");
 
 const initdata=require("./data");
 
+database.connect();
 
-dbmain();
 async function initDB(){
     await foodSchema.deleteMany({});
     await categorySchema.deleteMany({});

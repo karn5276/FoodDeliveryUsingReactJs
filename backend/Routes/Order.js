@@ -2,9 +2,6 @@ const express=require("express");
 const router=express.Router();
 const orderSchema=require("../models/Order");
 
-
-
-
 router.post("/orders",async(req,res)=>{
     // console.log(req.body);
     const exitUser=await orderSchema.findOne({email:req.body.email});

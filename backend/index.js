@@ -1,12 +1,12 @@
 const express=require("express");
 require('dotenv').config()
 const app=express();
-const dbmain=require("./db");
 const cors=require("cors");
 const food=require("./models/food");
 const foodCat=require('./models/category');
 const port=process.env.PORT || 2000;
 const bodyParser=require("body-parser");
+const database = require("./db");
 
 app.use(bodyParser.json());
 
@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use("/api",require("./Routes/CreateUser"));
 app.use("/",require("./Routes/Order"));
-dbmain();
+database.connect();
 
 app.get("/",async(req,res)=>{
     const data=await food.find({});

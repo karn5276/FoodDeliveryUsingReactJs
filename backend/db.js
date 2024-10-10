@@ -1,10 +1,17 @@
 const mongoose=require("mongoose");
-require('dotenv').config();
+require("dotenv").config();
 
-async function main(){
-    await mongoose.connect(process.env.ATLASDB_URL) 
-    .then(()=>console.log("db connected"))
-    .catch(()=>console.log("db not connected"));
-}
-
-module.exports=main;
+exports.connect=()=>{
+    mongoose.connect("mongodb://localhost:27017/GoFood",{
+        useNewUrlParser:true,
+        useUnifiedTopology:true
+    })
+    .then(()=>{
+        console.log("database connected");
+    })
+    .catch((err)=>{
+        console.log("error occuring during conneting with database");
+        console.log(err);
+        process.exit(1);
+    })
+};
